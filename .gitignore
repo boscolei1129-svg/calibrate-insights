@@ -1,0 +1,8 @@
+node_modules/
+private-data/
+*.zip
+followers*.json
+following*.json
+followers*.html
+following*.html
+!tests/**

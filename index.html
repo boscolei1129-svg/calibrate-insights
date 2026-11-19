@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A quieter way to understand your Instagram connections. Compare official exports privately, right in your browser.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Calibrate · Your connections, in perspective</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <aside class="sidebar">
+    <a class="brand" href="./" aria-label="Calibrate home"><span class="brand-icon" aria-hidden="true">c<span>•</span></span>calibrate<span class="brand-period">.</span></a>
+    <p class="eyebrow nav-label">YOUR SPACE</p>
+    <nav aria-label="Main navigation">
+      <a href="#overview" class="nav-item active" data-section="overview"><span aria-hidden="true">◫</span> Overview</a>
+      <a href="#connections" class="nav-item" data-section="connections"><span aria-hidden="true">◎</span> Connections</a>
+      <a href="#history" class="nav-item" data-section="history"><span aria-hidden="true">◷</span> Compare exports</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="privacy-card"><span class="lock" aria-hidden="true">⌑</span><strong>Just between you<br>and your browser.</strong><p>Your lists stay on this device. No account needed.</p><a href="#privacy">Our privacy promise</a></div>
+      <a class="nav-item" href="#guide"><span aria-hidden="true">?</span> Export guide</a>
+      <span class="sidebar-caption">A little clarity. A lot less noise.</span>
+    </div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar"><span>Instagram insights <span class="slash">/</span> <strong>Your overview</strong></span><span class="local-badge"><span aria-hidden="true">●</span> Processed on your device</span></header>
+    <main id="main">
+      <section class="intro" id="overview">
+        <div><p class="eyebrow">LESS GUESSWORK, MORE PERSPECTIVE</p><h1>Your connections,<br><span>in perspective.</span></h1><p class="lead">See who’s in your circle. Understand what’s changed.<br class="desktop-break"> All from your official Instagram export.</p></div>
+        <div class="orbit" aria-hidden="true"><div class="orbit-ring one"></div><div class="orbit-ring two"></div><span class="orbit-center">c<span>•</span></span><span class="orbit-dot d1">a</span><span class="orbit-dot d2">m</span><span class="orbit-dot d3">j</span><span class="orbit-star">✳</span><span class="orbit-tag">a clearer picture</span></div>
+      </section>
+
+      <section class="import-card" aria-labelledby="import-title">
+        <div class="import-copy"><span class="file-icon" aria-hidden="true">⇧</span><div><h2 id="import-title">Start with your export</h2><p>Add followers and following files. Your data never leaves this tab.</p><span class="file-types">JSON or HTML · Multiple files supported · Unzip first</span></div></div>
+        <div class="import-actions"><button class="button primary" id="choose-current">Choose files</button><button class="button text-button" id="try-demo">Try a demo</button></div>
+        <input type="file" id="current-files" accept=".json,.html,.htm" multiple hidden aria-label="Current Instagram export files">
+        <div class="drop-caption">You can also drop your files anywhere on this card. <a href="#guide">Where do I find my export?</a></div>
+      </section>
+      <div id="notice" role="status" aria-live="polite" class="notice" hidden></div>
+      <div class="dataset-bar"><span id="dataset-label">No export loaded yet</span><button id="clear-data" class="button subtle" hidden>Clear all data</button></div>
+      <details class="file-details" id="file-details" hidden><summary>Imported files & completeness</summary><p>Select <strong>every followers file</strong> from the same export, including followers_2, followers_3, etc. Missing parts or a restricted date range can make results incomplete. Add additional parts with Choose files. A file with the same name replaces the earlier copy.</p><ul id="file-list"></ul></details>
+
+      <section class="stats" aria-label="Connection summary">
+        <article class="stat"><div class="stat-label">Followers <span aria-hidden="true">◎</span></div><strong id="stat-followers">—</strong><span>Accounts following you</span></article>
+        <article class="stat"><div class="stat-label">Following <span aria-hidden="true">◉</span></div><strong id="stat-following">—</strong><span>Accounts you follow</span></article>
+        <article class="stat"><div class="stat-label">Mutuals <span aria-hidden="true">∞</span></div><strong id="stat-mutual">—</strong><span>You follow each other</span></article>
+        <article class="stat accent-stat"><div class="stat-label">Not following back <span aria-hidden="true">◌</span></div><strong id="stat-notBack">—</strong><span>From your imported snapshot</span></article>
+      </section>
+
+      <section class="connections-layout" id="connections">
+        <div class="connections-panel panel">
+          <div class="panel-heading"><div><h2>Your circle, a little clearer</h2><p id="list-subtitle">Import an export to explore your connections.</p></div><button id="export-csv" class="button secondary" disabled>Export CSV</button></div>
+          <div class="tabs" role="tablist" aria-label="Connection lists">
+            <button role="tab" aria-selected="true" aria-controls="results" id="tab-notBack" data-list="notBack">Not following back <span id="count-notBack">—</span></button>
+            <button role="tab" aria-selected="false" aria-controls="results" id="tab-mutual" data-list="mutual" tabindex="-1">Mutuals <span id="count-mutual">—</span></button>
+            <button role="tab" aria-selected="false" aria-controls="results" id="tab-fans" data-list="fans" tabindex="-1">Fans <span id="count-fans">—</span></button>
+            <button role="tab" aria-selected="false" aria-controls="results" id="tab-followers" data-list="followers" tabindex="-1">Followers <span id="count-followers">—</span></button>
+            <button role="tab" aria-selected="false" aria-controls="results" id="tab-following" data-list="following" tabindex="-1">Following <span id="count-following">—</span></button>
+          </div>
+          <div class="filters"><label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search username…" aria-label="Search username" autocomplete="off" spellcheck="false"></label><label class="sort-label"><span class="sr-only">Sort accounts</span><select id="sort"><option value="az">Username A–Z</option><option value="za">Username Z–A</option></select></label></div>
+          <div id="results" role="tabpanel" aria-labelledby="tab-notBack" tabindex="0"><div class="empty-state"><span class="empty-orbit" aria-hidden="true">◎</span><h3>Your circle starts here</h3><p>Add your export to see your connections,<br>or take a look around with demo data.</p><button class="button secondary" id="empty-demo">Explore the demo</button></div></div>
+          <div class="pagination"><span id="result-count" aria-live="polite">Ready when you are</span><div><button id="prev-page" class="button subtle" disabled>Previous</button><span id="page-label"></span><button id="next-page" class="button subtle" disabled>Next</button></div></div>
+        </div>
+        <aside class="insight-column">
+          <section class="panel balance-card"><p class="eyebrow">THE BIG PICTURE</p><h2>A look at your circle</h2><div class="ring" id="mutual-ring" role="img" aria-label="No data yet"><div><strong id="mutual-percent">—</strong><span>mutual</span></div></div><div class="legend"><span><i class="swatch violet"></i>Mutual connections <strong id="balance-mutual">—</strong></span><span><i class="swatch pale"></i>Following, one way <strong id="balance-oneway">—</strong></span></div><p class="small-note">Share of accounts you follow who also follow you.</p></section>
+          <section class="perspective-card"><span aria-hidden="true">✳</span><h3>Connections, not a score.</h3><p>Numbers are a snapshot, not a measure of friendship. Keep the people and things that make your feed feel like you.</p></section>
+        </aside>
+      </section>
+
+      <section id="history" class="panel history-panel" aria-labelledby="history-title"><div class="panel-heading"><div><p class="eyebrow">A LITTLE CONTEXT OVER TIME</p><h2 id="history-title">See what’s changed</h2><p>Compare an older export with your current one.</p></div><span class="pill">Optional</span></div><div class="history-body"><div><p>Load both lists from an older export of the <strong>same Instagram account</strong>. Include every follower part in both snapshots.</p><button class="button secondary" id="choose-previous">Choose older files</button><input type="file" id="previous-files" accept=".json,.html,.htm" multiple hidden aria-label="Older Instagram export files"><p id="previous-status" class="small-note">No older export loaded</p><button id="clear-previous" class="button subtle" hidden>Remove older export</button></div><div class="comparison-controls"><label>Older export date<input id="previous-date" type="date"></label><label>Current export date<input id="current-date" type="date"></label><label class="check-label"><input id="confirm-history" type="checkbox"> Both exports are complete and from the same account.</label></div></div><div id="history-notice" class="small-note" aria-live="polite">Add both exports and their dates to enable comparison.</div><div id="history-summary" class="history-summary" hidden></div><div id="history-results" hidden></div><p class="small-note history-caveat">A missing username is a list change, not proof of an unfollow. Renames, deactivations, incomplete exports, and Instagram’s export timing can affect results. The dates above are labels you supply; exports contain no reliable unfollow date.</p></section>
+
+      <section class="bottom-grid">
+        <details class="panel guide-panel" id="guide"><summary><span><span class="eyebrow">GETTING STARTED</span><strong>Get your Instagram export</strong></span><span aria-hidden="true">+</span></summary><ol><li>In Instagram, open <strong>Settings → Accounts Center → Your information and permissions</strong>.</li><li>Choose <strong>Export your information</strong> (sometimes called Download your information), then choose your Instagram profile and export to your device.</li><li>Select <strong>Followers and following</strong>, set the date range to <strong>All time</strong>, and choose <strong>JSON</strong> (recommended) or HTML.</li><li>When Instagram makes the download available, download and <strong>unzip</strong> it. Open <strong>connections/followers_and_following</strong> (the folder name can vary).</li><li>Use Choose files above. Select <strong>following.json</strong> and <strong>all followers_*.json</strong> files together. HTML files work too. Add any missing parts with Choose files.</li></ol><p class="small-note">Use one account and one export per snapshot. Don’t mix unrelated exports. Instagram’s menu labels may vary.</p><a href="https://accountscenter.instagram.com/info_and_permissions/" target="_blank" rel="noopener noreferrer">Open Instagram Accounts Center</a><p><a href="https://about.fb.com/news/2023/10/manage-your-information-across-apps/" target="_blank" rel="noopener noreferrer">Meta’s guide to information controls</a></p></details>
+        <details class="panel guide-panel" id="privacy"><summary><span><span class="eyebrow">PRIVATE BY DESIGN</span><strong>Your data stays yours</strong></span><span aria-hidden="true">+</span></summary><p>Your selected files are read locally in this browser tab. Calibrate has no backend, analytics, cookies, tracking pixels, external fonts, or Instagram sign-in. The app blocks outgoing data connections.</p><p>Lists live in memory only. Refresh, close the tab, or use Clear all data to discard them. Your original files and CSVs you download remain on your device.</p><p>GitHub serves the app and may log normal website requests such as your IP address. Selected file contents are never sent to GitHub. Opening an Instagram profile is optional and takes you to Instagram.</p><p>Don’t upload exports into a GitHub repository. Keep any exported CSV private too.</p></details>
+      </section>
+      <footer><a class="footer-brand" href="./">calibrate.</a><span>Made for clarity. Built for privacy.</span><span>Independent tool · Not affiliated with Instagram or Meta.</span></footer>
+    </main>
+  </div>
+</body>
+</html>
